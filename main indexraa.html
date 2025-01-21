@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPA计算 start</title>
+    <meta name="description" content="在线GPA计算器是一款免费的学分绩点计算工具，支持百分制、五分制、四分制等多种成绩计算方式。">
+    <meta name="keywords" content="gpa计算器在线计算,学分绩点计算器,GPA计算器在线计算,平均学分绩点计算器,腿腿教学网">
+    <link rel="stylesheet" href="main.css">
+    <script src="https://www.tuituisoft.com/public/newtuitui/js/baidu_analytics.js"></script>
+</head>
+
+<body>
+    <!-- 导航栏 -->
+    <div class="header">
+        <div class="nav">
+            <div class="nav-content">
+                <!-- <div class="nav-logo">
+                    <a href="https://www.tuituisoft.com/">腿腿教学网</a>
+                </div> -->
+                <button class="menu-toggle">
+                    <svg viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="currentColor" d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+                    </svg>
+                </button>
+                <div class="nav-menu">
+                    <ul>
+
+                    </ul>
+                </div>
+                <!-- <div class="nav-right">
+                    <a href="https://www.tuituisoft.com/index.php?s=/loginwx/wxscanlogin" class="login-btn">登录</a>
+                    <a href="https://www.tuituisoft.com/index.php?s=/loginwx/wxscanlogin" class="register-btn">注册</a>
+                </div> -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 主要内容区 -->
+    <main>
+        <div class="container">
+            <h1>GPA计算器</h1>
+            <div class="calculator-container">
+                <!-- <div class="calculator-tabs">
+                    <button class="tab-btn active" data-tab="input">成绩录入</button>
+                    <button class="tab-btn" data-tab="convert">成绩转换</button>
+                    <button class="tab-btn" data-tab="history">历史记录</button>
+                </div> -->
+
+                <div class="calculator-content">
+                    <!-- 成绩录入面板 -->
+                    <div class="tab-panel active" id="input-panel">
+                        <div class="input-section">
+                            <h3>成绩设置</h3>
+                            <div class="input-group">
+                                <label>成绩制度</label>
+                                <select id="grade-system">
+                                    <option value="hundred">百分制</option>
+                                    <option value="five">五分制(A-F)</option>
+                                    <option value="four">四分制(优-差)</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label>计算方式</label>
+                                <select id="calc-method">
+                                    <option value="weighted">加权平均</option>
+                                    <option value="arithmetic">算术平均</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="courses-section">
+                            <h3>课程列表</h3>
+                            <div class="course-list" id="course-list">
+                                <!-- 课程项目将通过JavaScript动态添加 -->
+                            </div>
+                            <button class="add-course-btn" onclick="addCourse()">添加课程</button>
+                        </div>
+
+                        <button class="calculate-btn" onclick="calculateGPA()">计算GPA</button>
+
+                        <div class="result" id="gpa-result">
+                            <!-- 将通过JavaScript动态填充 -->
+                        </div>
+                    </div>
+
+                    <!-- 成绩转换面板 -->
+                    <div class="tab-panel" id="convert-panel">
+                        <div class="input-section">
+                            <h3>成绩转换</h3>
+                            <div class="input-group">
+                                <label>原始成绩制度</label>
+                                <select id="from-system">
+                                    <option value="hundred">百分制</option>
+                                    <option value="five">五分制(A-F)</option>
+                                    <option value="four">四分制(优-差)</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label>目标成绩制度</label>
+                                <select id="to-system">
+                                    <option value="hundred">百分制</option>
+                                    <option value="five">五分制(A-F)</option>
+                                    <option value="four">四分制(优-差)</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label>原始成绩</label>
+                                <input type="text" id="original-grade" placeholder="请输入原始成绩">
+                            </div>
+                        </div>
+
+                        <button class="calculate-btn" onclick="convertGrade()">转换成绩</button>
+
+                        <div class="result" id="convert-result">
+                            <!-- 将通过JavaScript动态填充 -->
+                        </div>
+                    </div>
+
+                    <!-- 历史记录面板 -->
+                    <!-- <div class="tab-panel" id="history-panel">
+                        <div class="history-section">
+                            <h3>计算历史</h3>
+                            <div class="history-list" id="history-list">
+                                 将通过JavaScript动态填充 -->
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+
+        <!-- 使用说明部分 -->
+        <div class="tips-container">
+            <!-- <h3>
+                    <span class="tips-icon">📋</span>
+                    使用说明
+                </h3>
+                <div class="tips-content">
+                    <div class="tip-card">
+                        <div class="tip-icon">📚</div>
+                        <div class="tip-text">
+                            <h4>成绩录入</h4>
+                            <p>支持百分制、五分制、四分制等多种成绩制度，可选择加权平均或算术平均计算方式。</p>
+                        </div>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-icon">🔄</div>
+                        <div class="tip-text">
+                            <h4>成绩转换</h4>
+                            <p>支持不同成绩制度之间的转换，帮助你快速了解不同标准下的成绩表现。</p>
+                        </div>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-icon">📊</div>
+                        <div class="tip-text">
+                            <h4>历史记录</h4>
+                            <p>自动保存计算历史，方便随时查看和对比不同学期的GPA变化。</p>
+                        </div>
+                    </div>
+                </div> -->
+
+        </div>
+    </main>
+
+    <!-- 广告位 -->
+    <!-- <div class="ad-container">
+        <div class="ad-content">
+            广告-虚位以待
+        </div>
+    </div> -->
+
+    <!-- 底部版权 -->
+    <!-- <footer class="footer">
+        <div class="footer-content">
+            <p>Copyright © 2024 腿腿教学网 All Rights Reserved</p>
+            <p><a href="https://beian.miit.gov.cn/" target="_blank">闽ICP备11002952-4号</a></p>
+        </div>
+    </footer> -->
+
+    <script src="script.js"></script>
+</body>
+
+</html>
